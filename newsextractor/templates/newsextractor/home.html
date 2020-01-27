@@ -1,0 +1,25 @@
+{% extends "newsextractor/base.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+        {% for news in news_articles %}
+            <article class="media content-section">
+                <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="{% url 'newsarticles-detail' news.id %}">{{ news.title }}</a>
+                    <div class="text-muted">
+                        <small class="text-muted">{{ news.author }},</small>
+                        <small class="text-muted">{{ news.date_posted }}</small>
+                    </div>
+                </div>
+    <!--            <p class="article-content">{{ news.content }}</p>-->
+                <small>Fake Status: {{ news.fake_status }}</small>
+                </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <h2>You are not logged in.</h2>
+        <div class="border-top pt-3">
+            <small class="text-muted">Please Login to Continue.<a href="{% url 'portal-login' %}" class="ml-2">Login Again.</a></small>
+        </div>
+    {% endif %}
+{% endblock content %}

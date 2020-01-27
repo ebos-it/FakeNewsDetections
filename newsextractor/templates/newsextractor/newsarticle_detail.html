@@ -1,0 +1,21 @@
+{% extends "newsextractor/base.html" %}
+{% block content %}
+
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <h2 class="article-title" >TITLE: {{ object.title }}</h2>
+            </div>
+            <div class="article-metadata">
+                <a class="mr-2" href="#">AUTHOR: {{ object.author }}</a>
+                <small class="text-muted">POSTED DATE: {{ object.date_posted|date:"F d, Y" }}</small>
+                <div>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'newsarticles-update' object.id %}">Update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'newsarticles-delete' object.id %}">Delete</a>
+                </div>
+            </div>
+            <p class="article-content">CONTENT: {{ object.content }}</p>
+            <p align="right">FAKE STATUS: {{ object.fake_status }}</p>
+        </div>
+    </article>
+{% endblock content %}

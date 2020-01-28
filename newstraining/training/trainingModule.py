@@ -1,6 +1,6 @@
 from newsPortal.newsPortal.newstraining.DataAccessModule import DataAccess
-from newsPortal.newsPortal.newstraining.DataAccessModule import DataPreprocessor
-from .TrainingUtil import TrainingUtil
+from newsPortal.newsPortal.newstraining.preprocessor import datapreprocessor
+from .trainingUtil import TrainingUtil
 import numpy as np
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
@@ -16,7 +16,7 @@ class TrainingAlgorithm():
 
     def train(self):
         sentences, labels = DataAccess.DataAccess.getDataset()
-        filtered_sentences = DataPreprocessor.DataPreprocessor.preprocess_text(sentences)
+        filtered_sentences = datapreprocessor.DataPreprocessor.preprocess_text(sentences)
 
         X_train, X_test, Y_train, Y_test = TrainingUtil.splitTrainTest(filtered_sentences, labels, splitRatio=0.05)
 

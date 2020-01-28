@@ -1,11 +1,11 @@
-from newsPortal.newsPortal.newstraining.TrainingModule import TrainingModule
+from newsPortal.newsPortal.newstraining.training import trainingModule
 from keras.models import Sequential
 from keras.layers.embeddings import Embedding
 from keras.layers.core import Dense
 from keras.layers import Flatten
 import matplotlib.pyplot as plt
 
-class BaseLineNN(TrainingModule.TrainingAlgorithm):
+class BaseLineNN(trainingModule.TrainingAlgorithm):
     def __init__(self):
         super().__init__()
 

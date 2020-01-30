@@ -60,6 +60,7 @@ class ContentPreprocessor(Preprocessor):
         return word_tokenize(sentence)
 
     def createTokenizer(self, X_train):
+        print('hello')
         tokenizer = Tokenizer(num_words=5000)
         tokenizer.fit_on_texts(X_train)
         self.setTokenizer(tokenizer)

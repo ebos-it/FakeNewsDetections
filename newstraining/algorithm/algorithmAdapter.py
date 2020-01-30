@@ -22,7 +22,7 @@ class AlgorithmAdapter:
         preprocessor = ContentPreprocessor()
         preprocessedTrainingInput = preprocessor.preprocess(trainingInput)
         fndAlgo = self.getFNDAlgo()
-        fndAlgo.train()
+        fndAlgo.train(preprocessedTrainingInput)
 
     # get the configuration for trainingAlgo to use
     def getFNDAlgo(self):

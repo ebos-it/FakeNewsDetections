@@ -10,7 +10,7 @@ class NeuralNetwork(AbstractAlgorithm):
     def __init__(self):
         super().__init__()
 
-    def train(self):
+    def train(self,trainingInput):
         X_train, X_test, Y_train, Y_test, embedding_matrix = super().train()
         model = Sequential()
         embedding_layer = Embedding(

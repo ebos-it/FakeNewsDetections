@@ -53,5 +53,5 @@ class NeuralNetwork(AbstractAlgorithm):
         plt.show()
 
     def predict(self):
-        print(f'nisniibni')
+        print(f'nisniibnisk kk')
         pass

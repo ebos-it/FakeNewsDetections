@@ -1,6 +1,7 @@
 from newsPortal.newsPortal.newstraining.preprocessor.contentPreprocessor import ContentPreprocessor
 from newsPortal.newsPortal.newstraining.algorithm.impl.neuralNetwork import NeuralNetwork
 from newsPortal.newsPortal.newsPortal.settings import log
+from newsPortal.newsPortal.newstraining.trainingUtil import TrainingUtil
 
 
 class AlgorithmAdapter:
@@ -19,13 +20,18 @@ class AlgorithmAdapter:
     def __getattr__(self, item):
         return getattr(self.instance, item)
 
-    def initiateDetection(self, trainingInput):
-
-        preprocessor = ContentPreprocessor()
-        preprocessedTrainingInput = preprocessor.preprocess(trainingInput)
+    def initiateDetection(self, trainingInput, fndContext):
+        fndInputs = fndContext.fndConfig.fndModel.fndinput_set.filter(trainingIndicator="Y").all()
+        preprocessor = None
+        for fndInput in fndInputs:
+            if fndInput.variableName == "content":
+                preprocessor = ContentPreprocessor()
+        preprocessedTrainingInput = preprocessor.preprocess(trainingInput, fndContext)
         fndAlgo = self.getFNDAlgo()
-        fndAlgo.train(preprocessedTrainingInput)
+        if not fndAlgo:
+            log.debug("training algo not configured. Cannot train further")
+            return
+        fndAlgo.train(preprocessedTrainingInput,fndContext)
 
-    # get the configuration for trainingAlgo to use
     def getFNDAlgo(self):
-        return NeuralNetwork()
+        return TrainingUtil.getAlgo()

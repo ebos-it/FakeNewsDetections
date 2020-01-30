@@ -11,4 +11,4 @@ class FNDExecutor:
         trainingInput = inputDataGenerator.generateInput("training")
 
         algorithmAdapter = AlgorithmAdapter()
-        algorithmAdapter.initiateDetection(trainingInput)
+        algorithmAdapter.initiateDetection(trainingInput=trainingInput,fndContext=fndContext)

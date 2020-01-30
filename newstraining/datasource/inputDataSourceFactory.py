@@ -32,7 +32,7 @@ class InputDataSourceFactory:
         ):
             dataSource = AuthorDS()
         if (
-            fndInput.variableName.lower() == "content"
+            fndInput.variableName.lower() == "title"
             and fndInput.trainingIndicator == "Y"
         ):
             dataSource = TitleDS()

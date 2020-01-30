@@ -1,5 +1,6 @@
 from newsPortal.newsPortal.newstraining.preprocessor.contentPreprocessor import ContentPreprocessor
 from newsPortal.newsPortal.newstraining.algorithm.impl.neuralNetwork import NeuralNetwork
+from newsPortal.newsPortal.newsPortal.settings import log
 
 
 class AlgorithmAdapter:
@@ -19,6 +20,7 @@ class AlgorithmAdapter:
         return getattr(self.instance, item)
 
     def initiateDetection(self, trainingInput):
+
         preprocessor = ContentPreprocessor()
         preprocessedTrainingInput = preprocessor.preprocess(trainingInput)
         fndAlgo = self.getFNDAlgo()

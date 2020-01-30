@@ -4,6 +4,7 @@ from keras.layers.core import Dense
 from keras.layers.embeddings import Embedding
 from keras.models import Sequential
 from newsPortal.newsPortal.newstraining.algorithm.abstractAlgorithm import AbstractAlgorithm
+from newsPortal.newsPortal.newsPortal.settings import log
 
 
 class NeuralNetwork(AbstractAlgorithm):

@@ -1,6 +1,7 @@
 from newsPortal.newsPortal.newstraining.datasource.inputDataSourceFactory import (
     InputDataSourceFactory,
 )
+from newsPortal.newsPortal.newsPortal.settings import log
 
 
 class InputDataGenerator:

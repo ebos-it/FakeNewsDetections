@@ -1,12 +1,18 @@
-from newsPortal.newsPortal.newstraining.DataAccessModule import DataAccess
-from newsPortal.newsPortal.newstraining.preprocessor import datapreprocessor
-from .trainingUtil import TrainingUtil
-import numpy as np
-from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
+import configparser
 import os
 
-class TrainingAlgorithm():
+import numpy as np
+from keras.preprocessing.sequence import pad_sequences
+from keras.preprocessing.text import Tokenizer
+
+from newsPortal.newsPortal.newstraining.preprocessor import contentPreprocessor
+from newsPortal.newsPortal.newstraining.algorithm.impl.trainingUtil import TrainingUtil
+
+cParser = configparser.ConfigParser()
+cParser.read("..\\..\\configurations.ini")
+
+
+class TrainingAlgorithm:
     gloveDirectory = "D:\\ml and dl\\keras\\dataset\\glove\\glove.6B"
     gloveFilename = "glove.6B.100d.txt"
     absoluteGloveFilePath = os.path.join(gloveDirectory, gloveFilename)
@@ -15,10 +21,14 @@ class TrainingAlgorithm():
         pass
 
     def train(self):
-        sentences, labels = DataAccess.DataAccess.getDataset()
-        filtered_sentences = datapreprocessor.DataPreprocessor.preprocess_text(sentences)
+        sentences, labels = DataAccess.getDataset()
+        filtered_sentences = contentPreprocessor.DataPreprocessor.preprocess_text(
+            sentences
+        )
 
-        X_train, X_test, Y_train, Y_test = TrainingUtil.splitTrainTest(filtered_sentences, labels, splitRatio=0.05)
+        X_train, X_test, Y_train, Y_test = TrainingUtil.splitTrainTest(
+            filtered_sentences, labels, splitRatio=0.05
+        )
 
         tokenizer = Tokenizer(num_words=5000)
         tokenizer.fit_on_texts(X_train)
@@ -36,7 +46,7 @@ class TrainingAlgorithm():
         for line in glove_file:
             records = line.split()
             word = records[0]
-            vector_dimensions = np.asarray(records[1:], dtype='float32')
+            vector_dimensions = np.asarray(records[1:], dtype="float32")
             embeddings_dictionary[word] = vector_dimensions
         glove_file.close()
 

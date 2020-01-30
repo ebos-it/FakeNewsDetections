@@ -1,7 +1,7 @@
 from newsPortal.newsPortal.newstraining.training import trainingModule
 
 
-class LSTM(trainingModule.TrainingAlgorithm):
+class ConvolutionalNN(trainingModule.TrainingAlgorithm):
     def __init__(self):
         super().__init__()
 

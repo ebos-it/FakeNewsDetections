@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('newsextractor', '0003_newsarticle_date_posted'),
+        ("newsextractor", "0003_newsarticle_date_posted"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='newsarticle',
-            name='fake_status',
+            model_name="newsarticle",
+            name="fake_status",
             field=models.BooleanField(default=False),
         ),
     ]

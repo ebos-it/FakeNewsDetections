@@ -17,14 +17,23 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 from django.contrib.auth import views as auth_views
+from django.conf.urls import url
 
 urlpatterns = [
-    path('admin/',admin.site.urls),
-    path('portal_login/',auth_views.LoginView.as_view(template_name='portalusers/login.html',
-                                                      redirect_authenticated_user=True),
-         name='portal-login'),
-    path('portal_logout/',auth_views.LogoutView.as_view(template_name='portalusers/logout.html'),
-         name='portal-logout'),
-    path('newsextractor/',include('newsextractor.urls')),
-    path('', RedirectView.as_view(url='newsextractor/', permanent=True)),
+    path("admin/", admin.site.urls),
+    path(
+        "portal_login/",
+        auth_views.LoginView.as_view(
+            template_name="portalusers/login.html", redirect_authenticated_user=True
+        ),
+        name="portal-login",
+    ),
+    path(
+        "portal_logout/",
+        auth_views.LogoutView.as_view(template_name="portalusers/logout.html"),
+        name="portal-logout",
+    ),
+    path("newsextractor/", include("newsextractor.urls")),
+    path("", RedirectView.as_view(url="newsextractor/", permanent=True)),
+    url(r"^api-auth/", include("rest_framework.urls")),
 ]

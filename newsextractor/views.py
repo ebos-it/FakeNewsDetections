@@ -6,24 +6,24 @@ from django.views.generic import (
     CreateView,
     DetailView,
     DeleteView,
-    UpdateView
+    UpdateView,
 )
 from .models import NewsArticle
 from .forms import NewsArticleForm
 
+
 def home(request):
-    context = {
-        'news_articles': NewsArticle.objects.all(),
-        'title': 'Portal - Homepage'
-    }
-    return render(request,'newsextractor/home.html',context)
+    context = {"news_articles": NewsArticle.objects.all(), "title": "Portal - Homepage"}
+    return render(request, "newsextractor/home.html", context)
+
 
 class NewsArticlesListView(ListView):
     model = NewsArticle
-    template_name = 'newsextractor/home.html'
-    context_object_name = 'news_articles'
+    template_name = "newsextractor/home.html"
+    context_object_name = "news_articles"
 
-    ordering = ['-date_posted']
+    ordering = ["-date_posted"]
+
 
 class NewsArticlesCreateView(LoginRequiredMixin, CreateView):
     model = NewsArticle
@@ -32,12 +32,15 @@ class NewsArticlesCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         return super().form_valid(form)
 
+
 class NewsArticlesDetailView(DetailView):
     model = NewsArticle
 
+
 class NewsArticlesDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = NewsArticle
-    success_url = '/'
+    success_url = "/"
+
 
 class NewsArticlesUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = NewsArticle

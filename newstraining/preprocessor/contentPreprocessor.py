@@ -102,6 +102,7 @@ class ContentPreprocessor(Preprocessor):
         return X_train, X_test, embedding_matrix
 
     def preprocess(self, sentences, fndContext):
+        print(f'preprocessing')
         filtered_sentences = []
         for sentence, label in sentences:
             sentence = self.removeSymbols(sentence)
